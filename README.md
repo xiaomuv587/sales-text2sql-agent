@@ -73,9 +73,7 @@ $env:LLM_API_KEY="sk-你的key"          # PowerShell
 python step2_text2sql.py
 ```
 
-只想先验证环境、不调用模型的话，跑 `python step0_offline_check.py`，它完全离线。
-
-在 `step2_text2sql.py` 的 `questions` 列表里换问题，就能压测不同的查询意图。
+在 `step2_text2sql.py` 的 `questions` 列表里换问题，就能压测不同的查询意图。想让模型只跟你聊一句、不碰数据库，可以跑 `python step1_api.py`，它只发一次请求、打印回复和 token 用量。
 
 ---
 
@@ -106,15 +104,14 @@ python step2_text2sql.py
 
 | 文件                       | 作用                                        |
 | ------------------------ | ----------------------------------------- |
-| `step0_offline_check.py` | 离线自检，不调用模型                                |
-| `step1_api.py`           | 跑通一次大模型 API 调用                            |
+| `step1_api.py`           | 跑通一次大模型 API 调用（不碰数据库）                     |
 | `step2_text2sql.py`      | 最小 Text-to-SQL 闭环（造数据 → 生成 SQL → 执行 → 回答） |
 | `README.md`              | 本说明                                       |
 
 ---
 
-## 上传前红线
+## 使用约定
 
-- `step1_api.py` / `step2_text2sql.py` 顶部的 `PASTE_KEY_HERE` 必须保持为空字符串 `""`。Key 一律走环境变量，不要写进代码、不要发聊天、不要进仓库。
+- `step1_api.py` / `step2_text2sql.py` 顶部的 `PASTE_KEY_HERE` 保持为空字符串 `""`，Key 一律走环境变量，不要写进代码、不要进仓库。
 - 数据全部是脚本生成的假数据，不要把公司真实报表、真实品牌或门店代码粘进来。
 - 使用方式说「本地跑通」，不说「上线」「生产环境」。
